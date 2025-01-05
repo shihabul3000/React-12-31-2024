@@ -1,35 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
+import './App.css';
+import app from "./Firebase/firebase.config";
+import { useState } from "react";
+
+const auth = getAuth(app);
+const GoogleProvider = new GoogleAuthProvider();
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [user, setUser] = useState(null);
+
+  const handleGoogleSignIn = () => {
+    signInWithPopup(auth, GoogleProvider)
+      .then(result => {
+        const loggedUser = result.user;
+        console.log("User signed in:", loggedUser);
+        setUser(loggedUser);
+      })
+      .catch(error => {
+        console.error("Error during sign-in:", error);
+      });
+  };
+
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        console.log("User signed out successfully");
+        setUser(null);
+      })
+      .catch(error => {
+        console.error("Error during sign-out:", error);
+      });
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>Firebase + React</h1>
+      {user ? (
+        <div>
+          <button onClick={handleSignOut}>Sign Out</button>
+          <div className="card">
+            <h4>User: {user.displayName}</h4>
+            <h3>Email: {user.email}</h3>
+          </div>
+        </div>
+      ) : (
+        <button onClick={handleGoogleSignIn}>Google Sign In</button>
+      )}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
