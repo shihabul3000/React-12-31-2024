@@ -18,9 +18,17 @@ const Login = () => {
         setMessageType("");
 
         signInWithEmailAndPassword(auth, email, password)
-            .then(() => {
+            .then(result => {
+                console.log(result.user);
                 setMessage("Successfully logged in!");
                 setMessageType("success");
+                
+                if(result){
+                    setMessage("User Logged in SuccessFully ")
+                }
+                else{
+                    alert("Please Verify Your Email")
+                }
             })
             .catch((error) => {
                 if (error.code === "auth/user-not-found") {
