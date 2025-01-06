@@ -4,16 +4,29 @@ import { useState } from "react";
 
 const HeroRegister = () => {
     const [registerError , setRegisterError] = useState('');
+    const [success , setSuccess] = useState('');
     const handleRegister = e =>{
         e.preventDefault();  // form jokhon submit korbo tokhon jeno form ta realod na mare
         
         const email = e.target.email.value;
         const password = e.target.password.value;
         console.log(email,password);
+
+        // Reset Error
+        setRegisterError ('');
+        setSuccess('');
+
+      if(password.length < 6){
+        setRegisterError('Password should be at least 6 charecters or longer');
+        return;
+      }
+
         //create user
+
         createUserWithEmailAndPassword(auth,email,password)
    .then( result=>{
     console.log(result.user);
+    setSuccess('User Created Successfully');
    })
    .catch(error => {
     console.log(error);
@@ -68,6 +81,9 @@ const HeroRegister = () => {
                     </form>
                     {
                         registerError && <p className="text-red-800">{registerError}</p>
+                    }
+                    {
+                        success && <p className="text-green-900">{success}</p>
                     }
                 </div>
             </div>
