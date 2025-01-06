@@ -1,38 +1,45 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import auth from "../../../firebase.config";
 import { useState } from "react";
+import { FaEye , FaEyeSlash } from 'react-icons/fa';
 
 const HeroRegister = () => {
-    const [registerError , setRegisterError] = useState('');
-    const [success , setSuccess] = useState('');
-    const handleRegister = e =>{
-        e.preventDefault();  // form jokhon submit korbo tokhon jeno form ta realod na mare
-        
+    const [registerError, setRegisterError] = useState('');
+    const [success, setSuccess] = useState('');
+    const[showPassword , setShowPassword] = useState(false);
+
+    const handleRegister = (e) => {
+        e.preventDefault(); // Prevent form reload
+
         const email = e.target.email.value;
         const password = e.target.password.value;
-        console.log(email,password);
+        console.log(email, password);
 
-        // Reset Error
-        setRegisterError ('');
+        // Reset messages
+        setRegisterError('');
         setSuccess('');
 
-      if(password.length < 6){
-        setRegisterError('Password should be at least 6 charecters or longer');
-        return;
-      }
+        // Validate password
+        if (password.length < 6) {
+            setRegisterError('Password should be at least 6 characters or longer');
+            return;
+        }
+        if (!/[A-Z]/.test(password)) {
+            setRegisterError('Your password should have at least one uppercase character');
+            return;
+        }
 
-        //create user
-
-        createUserWithEmailAndPassword(auth,email,password)
-   .then( result=>{
-    console.log(result.user);
-    setSuccess('User Created Successfully');
-   })
-   .catch(error => {
-    console.log(error);
-    setRegisterError(error.message)
-   })
-    }
+        // Create user
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((result) => {
+                console.log(result.user);
+                setSuccess('User created successfully');
+            })
+            .catch((error) => {
+                console.log(error);
+                setRegisterError(error.message);
+            });
+    };
 
     return (
         <div className="hero bg-base-200 min-h-screen">
@@ -54,7 +61,8 @@ const HeroRegister = () => {
                                 type="email"
                                 placeholder="email"
                                 className="input input-bordered"
-                                required name="email"
+                                required
+                                name="email"
                             />
                         </div>
                         <div className="form-control">
@@ -62,11 +70,17 @@ const HeroRegister = () => {
                                 <span className="label-text">Password</span>
                             </label>
                             <input
-                                type="password"
+                                type={showPassword ? "text" :"password"}
                                 placeholder="password"
                                 className="input input-bordered"
-                                required name="password"
+                                required
+                                name="password"
                             />
+                            <span onClick={()=> setShowPassword(!showPassword)}>
+                                {
+                                showPassword ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>
+                                }
+                                </span>
                             <label className="label">
                                 <a href="#" className="label-text-alt link link-hover">
                                     Forgot password?
@@ -75,16 +89,12 @@ const HeroRegister = () => {
                         </div>
                         <div className="form-control mt-6">
                             <button className="btn btn-primary" type="submit">
-                                Login
+                                Register
                             </button>
                         </div>
                     </form>
-                    {
-                        registerError && <p className="text-red-800">{registerError}</p>
-                    }
-                    {
-                        success && <p className="text-green-900">{success}</p>
-                    }
+                    {registerError && <p className="text-red-800">{registerError}</p>}
+                    {success && <p className="text-green-900">{success}</p>}
                 </div>
             </div>
         </div>
