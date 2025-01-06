@@ -1,13 +1,26 @@
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import auth from "../../firebase.config";
+import { useState } from "react";
+
 
 
 const Register = () => {
+    const [registerError , setRegisterError ] = useState('');
     const handleRegister = e =>{
         e.preventDefault();  // form jokhon submit korbo tokhon jeno form ta realod na mare
         
         const email = e.target.email.value;
         const password = e.target.password.value;
         console.log(email,password);
-
+        //create user
+        createUserWithEmailAndPassword(auth,email,password)
+   .then( result=>{
+    console.log(result.user);
+   })
+   .catch(error => {
+    console.log(error);
+    setRegisterError(error.message);
+   })
     }
     return (
         <div className="">
@@ -24,6 +37,9 @@ const Register = () => {
                  
 
             </form>
+            {
+               registerError && <p className="text-red-700">{registerError}</p>
+            }
             </div>
         </div>
     );
