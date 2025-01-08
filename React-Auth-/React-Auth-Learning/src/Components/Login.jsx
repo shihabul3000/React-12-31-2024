@@ -1,12 +1,22 @@
+import { Link } from "react-router-dom";
 
 
 const Login = () => {
+
+    const handleLogin = e =>{
+        e.preventDefault();
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        console.log (email , password);
+    }
+
+
     return (
       <>
       
       <div className="hero bg-base-200 min-h-screen">
-  <div className="hero-content flex-col lg:flex-row-reverse">
-    <div className="text-center lg:text-left">
+     <div className="hero-content flex-col ">
+    <div className="text-center ">
       <h1 className="text-5xl font-bold">Login now!</h1>
     
     </div>
@@ -15,7 +25,7 @@ const Login = () => {
 
 
 
-      <form className="card-body">
+      <form className="card-body" onSubmit={handleLogin}>
         <div className="form-control">
           <label className="label">
             <span className="label-text">Email</span>
@@ -36,6 +46,17 @@ const Login = () => {
         </div>
       </form>
 
+{
+  <p>
+  New To Auth Moha Millon? Please{" "}
+  <Link to="/register">
+    <button className="btn bg-blue-500 text-white hover:bg-blue-600">Register</button>
+  </Link>
+</p>
+
+
+}
+    
 
 
 
