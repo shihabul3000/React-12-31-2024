@@ -7,8 +7,8 @@ import {
 import "./index.css";
 import Root from "./Component/Root/Root";
 import Home from "./Component/Home/Home";
+import Registration from "./Component/Registration/Registration";
 import Login from "./Component/Login/Login";
-import Register from "./Component/Register/Register";
 
 const router = createBrowserRouter([
   {
@@ -16,21 +16,23 @@ const router = createBrowserRouter([
     element: <Root></Root>,
     children:[
       {
-        path: "/home",
-        element: <Home></Home>,
+        path: '/home',
+        element: <Home></Home>
       },
       {
-        path: "/login",
-        element: <Login></Login>,
+        path: '/registration',
+        element: <Registration></Registration>
       },
       {
-        path: "/register",
-        element: <Register></Register>,
+        path: '/login',
+        element: <Login></Login>
       },
-     
+
+
+
+      
     ]
   },
-  
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

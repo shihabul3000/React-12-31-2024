@@ -88,6 +88,7 @@ const Login = () => {
                     </p>
                 </div>
                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+                    
                     <form className="card-body" onSubmit={handleLogin}>
                         {message && (
                             <div
