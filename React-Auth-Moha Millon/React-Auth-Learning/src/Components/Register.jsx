@@ -1,12 +1,15 @@
 
-import { createUserWithEmailAndPassword } from "firebase/auth";
+
+;
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-import auth from "../firebase.config";
+import { AuthContex } from "../Provider/AuthProvider";
+
 
 
 const Register = () => {
   
-
+const {createUser} = useContext(AuthContex);
  
 
 
@@ -21,18 +24,13 @@ const Register = () => {
 
         // Create User in Firebase
 
-        createUserWithEmailAndPassword( auth ,email,password)
-        .then(result => {
-          console.log(result.user)
+        createUser(email,password)
+        .then(result =>{
+          console.log(result.user);
         })
-        .catch(error => {
+        .catch(error =>{
           console.log(error)
         })
- 
-        
-
-
-
 
 
 
