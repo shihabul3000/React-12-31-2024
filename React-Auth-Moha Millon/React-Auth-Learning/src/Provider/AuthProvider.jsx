@@ -1,5 +1,5 @@
 
-import {  createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import {  createUserWithEmailAndPassword,  signInWithEmailAndPassword } from "firebase/auth";
 
 import { createContext , useState } from "react";
 import PropTypes from 'prop-types';
@@ -9,7 +9,7 @@ export const AuthContex = createContext(null);
 
 const AuthProvider = ({ children }) => {
 
-    const [user ] = useState(null);
+    const [user ,  ] = useState(null);
 
     const createUser = (email , password) => {
         return createUserWithEmailAndPassword( auth, email , password)
@@ -21,7 +21,13 @@ const AuthProvider = ({ children }) => {
     }
 
 
-
+    // useEffect(() => {
+    //     onAuthStateChanged(auth , currentUser =>{
+    //         setUser(currentUser);
+    //         console.log('Observing Current User inside useEffect of AuthProvider' , currentUser);
+    //     })
+    // })
+// 
     const authInfo = { user , createUser , singInUser  }
 
     return (
