@@ -9,6 +9,7 @@ const AuthProvider = ({ children }) => {
 
     return (
         <>
+        
             <AuthContex.Provider value={authInfo}>
                 {children}
             </AuthContex.Provider>
@@ -21,6 +22,7 @@ AuthProvider.propTypes = { // Corrected to lowercase `propTypes`
 };
 
 export default AuthProvider;
+
 
 
 /*
