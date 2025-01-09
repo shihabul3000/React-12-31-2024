@@ -1,6 +1,13 @@
+
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { Link } from "react-router-dom";
+import auth from "../firebase.config";
+
 
 const Register = () => {
+  
+
+ 
 
 
     const handleRegister = e =>{
@@ -10,6 +17,25 @@ const Register = () => {
         const email = e.target.email.value;
         const password = e.target.password.value;
         console.log (name , email , password);
+
+
+        // Create User in Firebase
+
+        createUserWithEmailAndPassword( auth ,email,password)
+        .then(result => {
+          console.log(result.user)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+ 
+        
+
+
+
+
+
+
     }
 
 
@@ -59,7 +85,7 @@ const Register = () => {
           </label>
         </div>
         <div className="form-control mt-6">
-          <button className="btn btn-primary">Login</button>
+          <button className="btn btn-primary">Register</button>
         </div>
       </form>
 
