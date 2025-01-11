@@ -27,35 +27,6 @@ const Home = () => {
         <div className="border"><RightSideNav></RightSideNav></div>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
        </div>
        </>
        
