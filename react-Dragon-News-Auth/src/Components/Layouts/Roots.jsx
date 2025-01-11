@@ -4,8 +4,11 @@ import { Outlet } from "react-router-dom";
 const Roots = () => {
     return (
        <>
-       <h1> This is Roots</h1>
-       <Outlet></Outlet>
+   <div className="max-w-6xl mx-auto  font-poppins">
+   
+   <Outlet></Outlet>
+   </div>
+      
        </>
        
        
