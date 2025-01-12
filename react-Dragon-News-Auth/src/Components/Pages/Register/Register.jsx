@@ -1,15 +1,36 @@
 import { Link } from "react-router-dom";
 import Navbar from "../Sheard/NavBar/Navbar";
+import { useContext } from "react";
+import { AuthContex } from "../../../Providers/AuthProvider";
+
 
 const Register = () => {
+
+    const {createUser } = useContext (AuthContex);
+
+
     const handleRegister = e =>{
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
-        console.log(e.currentTarget);
-        const form = new FormData(e.currentTarget);
-        console.log(form.get('email'));
-        console.log(email,password);
+        const name = e.target.name.value;
+        const photourl = e.target.photourl.value;
+
+    
+        console.log(name,photourl,email,password);
+
+
+        // Create User
+        createUser (email,password)
+        .then(result => {
+            console.log(result.user)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+
+
+
     }
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
@@ -79,7 +100,7 @@ const Register = () => {
 
                 <div className="form-control mt-6">
                     <button className="btn btn-primary w-full py-3 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        Login
+                        Register
                     </button>
                 </div>
             </form>
