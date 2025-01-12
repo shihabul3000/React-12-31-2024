@@ -5,9 +5,11 @@
             <div>
                 <button className="btn btn-secondary">Breaking News</button>
 
-                    <Marquee pauseOnHover={true} speed={200}>
-                         I can be a React component, multiple React components, or just some text.
+                    <Marquee pauseOnHover={true} speed={0}>
+                         I can be a React component, multiple React components, or just some text. 
+                    
                      </Marquee>
+                   
             </div>
         );
     };
