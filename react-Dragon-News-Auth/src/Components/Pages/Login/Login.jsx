@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom";
 import Navbar from "../Sheard/NavBar/Navbar";
+import { useContext } from "react";
+import { AuthContex } from "../../../Providers/AuthProvider";
+
 
 const Login = () => {
+
+    const {signIn} = useContext(AuthContex);
+
     const handleLogin = e =>{
         e.preventDefault();
         const email = e.target.email.value;
@@ -10,6 +16,14 @@ const Login = () => {
         const form = new FormData(e.currentTarget);
         console.log(form.get('email'));
         console.log(email,password);
+        
+        signIn (email , password)
+        .then(result =>{
+            console.log (result.user);
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
