@@ -13,6 +13,6 @@ const user : {
     firstName : 'Shihaul Islam',
     
     lastName : 'Ali' ,
-    isMarried : true,
+    isMarried : false,
 };
 
